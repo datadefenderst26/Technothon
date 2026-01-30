@@ -38,6 +38,23 @@ export const mockChatSessions: ChatSession[] = [
   },
 ];
 
+export const mockFavorites: ChatSession[] = [
+  {
+    id: 'fav-1',
+    title: 'Top Revenue Query',
+    messages: [],
+    createdAt: new Date('2024-01-10'),
+    updatedAt: new Date('2024-01-15'),
+  },
+  {
+    id: 'fav-2',
+    title: 'Daily Active Users',
+    messages: [],
+    createdAt: new Date('2024-01-08'),
+    updatedAt: new Date('2024-01-14'),
+  },
+];
+
 export const mockTemplates: SavedTemplate[] = [
   {
     id: '1',

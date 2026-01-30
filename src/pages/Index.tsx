@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { QueryResult } from '@/types';
 import { AppSidebar } from '@/components/layout/AppSidebar';
 import { ChatInterface } from '@/components/chat/ChatInterface';
 import { ContextPanel } from '@/components/panels/ContextPanel';
 import { AuditLogs } from '@/components/admin/AuditLogs';
 import { UserManagement } from '@/components/admin/UserManagement';
+import { DatabaseStatus } from '@/components/admin/DatabaseStatus';
 import { DatabaseIndicator } from '@/components/common/DatabaseIndicator';
 import { RoleToggle } from '@/components/common/RoleToggle';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
+import {
   ResizableHandle, 
   ResizablePanel, 
   ResizablePanelGroup 
@@ -18,14 +20,16 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const Index = () => {
+  const location = useLocation();
+  const loginState = location.state as { isAdmin?: boolean } | null;
+  
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeChatId, setActiveChatId] = useState<string | null>(null);
   const [currentSQL, setCurrentSQL] = useState<string | null>(null);
   const [currentResults, setCurrentResults] = useState<QueryResult | null>(null);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(loginState?.isAdmin ?? true);
   const [isDark, setIsDark] = useState(true);
   const [activeMainTab, setActiveMainTab] = useState('chat');
-
   const handleQueryGenerated = (sql: string, results: QueryResult) => {
     setCurrentSQL(sql);
     setCurrentResults(results);
@@ -113,9 +117,15 @@ const Index = () => {
 
           {isAdmin && (
             <TabsContent value="admin" className="flex-1 m-0 p-4 min-h-0 overflow-auto">
-              <div className="grid lg:grid-cols-2 gap-4 h-full">
-                <AuditLogs />
-                <UserManagement />
+              <div className="space-y-4">
+                {/* Database Status Section */}
+                <DatabaseStatus />
+                
+                {/* Audit Logs and User Management */}
+                <div className="grid lg:grid-cols-2 gap-4">
+                  <AuditLogs />
+                  <UserManagement />
+                </div>
               </div>
             </TabsContent>
           )}
