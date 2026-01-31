@@ -79,6 +79,11 @@ const Index = () => {
           </div>
         </header>
 
+        {/* Shared Database Status - Visible to all roles */}
+        <div className="px-4 py-3 border-b border-border/50 bg-card/30">
+          <DatabaseStatus />
+        </div>
+
         {/* Main Tabs */}
         <Tabs value={activeMainTab} onValueChange={setActiveMainTab} className="flex-1 flex flex-col min-h-0">
           <div className="px-4 py-2 border-b border-border/50 bg-card/30">
@@ -117,15 +122,10 @@ const Index = () => {
 
           {isAdmin && (
             <TabsContent value="admin" className="flex-1 m-0 p-4 min-h-0 overflow-auto">
-              <div className="space-y-4">
-                {/* Database Status Section */}
-                <DatabaseStatus />
-                
-                {/* Audit Logs and User Management */}
-                <div className="grid lg:grid-cols-2 gap-4">
-                  <AuditLogs />
-                  <UserManagement />
-                </div>
+              {/* Audit Logs and User Management */}
+              <div className="grid lg:grid-cols-2 gap-4">
+                <AuditLogs />
+                <UserManagement />
               </div>
             </TabsContent>
           )}
