@@ -6,7 +6,7 @@ import { ChatInterface } from '@/components/chat/ChatInterface';
 import { ContextPanel } from '@/components/panels/ContextPanel';
 import { AuditLogs } from '@/components/admin/AuditLogs';
 import { UserManagement } from '@/components/admin/UserManagement';
-import { DatabaseStatus } from '@/components/admin/DatabaseStatus';
+
 import { DatabaseIndicator } from '@/components/common/DatabaseIndicator';
 import { RoleToggle } from '@/components/common/RoleToggle';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -80,9 +80,6 @@ const Index = () => {
         </header>
 
         {/* Shared Database Status - Visible to all roles */}
-        <div className="px-4 py-3 border-b border-border/50 bg-card/30">
-          <DatabaseStatus />
-        </div>
 
         {/* Main Tabs */}
         <Tabs value={activeMainTab} onValueChange={setActiveMainTab} className="flex-1 flex flex-col min-h-0">
