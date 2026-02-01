@@ -29,7 +29,7 @@ const Index = () => {
   const [currentResults, setCurrentResults] = useState<QueryResult | null>(null);
   const [isAdmin, setIsAdmin] = useState(loginState?.isAdmin ?? true);
   const [isDark, setIsDark] = useState(true);
-  const [activeMainTab, setActiveMainTab] = useState('chat');
+  const [activeMainTab, setActiveMainTab] = useState(loginState?.isAdmin ? 'admin' : 'chat');
   const handleQueryGenerated = (sql: string, results: QueryResult) => {
     setCurrentSQL(sql);
     setCurrentResults(results);
